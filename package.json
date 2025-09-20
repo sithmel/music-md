@@ -1,0 +1,33 @@
+{
+  "name": "music-md",
+  "version": "1.0.0",
+  "description": "A markdown renderer that converts markdown files to HTML or PDF with music notation support",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "format": "prettier --write .",
+    "types": "tsc"
+  },
+  "keywords": [
+    "markdown",
+    "music",
+    "lilypond",
+    "pdf",
+    "html"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lilynode": "^0.5.2",
+    "puppeteer": "^24.22.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "svguitar": "^2.4.1",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}

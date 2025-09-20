@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music-MD Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .lilypond-error, .svguitar-error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-left: 4px solid #f44336;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<h1>Music Notation Demo</h1>
+<p>This document demonstrates both the LilyPond and SVGuitar integrations in music-md.</p>
+<h2>Simple Melody</h2>
+<p>Here's a basic melody in C major:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" width="100%" height="15.00" viewBox="0 0.6242999999999999 45.9751 15">
+<style type="text/css">
+<![CDATA[
+tspan { white-space: pre; }
+]]>
+</style>
+<g transform="translate(0.0000, 9.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.9751" y2="0"/>
+</g>
+<g transform="translate(0.0000, 8.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.9751" y2="0"/>
+</g>
+<g transform="translate(0.0000, 7.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.9751" y2="0"/>
+</g>
+<g transform="translate(0.0000, 6.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.9751" y2="0"/>
+</g>
+<g transform="translate(0.0000, 5.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.9751" y2="0"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="8.3739" y="-0.1000" width="1.9563" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(20.9457, 7.6243)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(33.1271, 7.6243)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(25.0380, 8.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(26.2772, 7.6243)">
+<rect x="-0.0650" y="-3.0000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(23.2749, 7.6243)">
+<rect x="-0.0650" y="-2.5000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(22.0357, 8.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(31.0608, 7.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(31.1258, 7.6243)">
+<rect x="-0.0650" y="-0.2410" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(28.1235, 7.6243)">
+<rect x="-0.0650" y="0.1861" width="0.1300" height="3.1472" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(28.0585, 7.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(11.7023, 10.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(8.7000, 10.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(9.9392, 7.6243)">
+<rect x="-0.0650" y="-0.5000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(5.0000, 7.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M250 262c116 0 176 -106 176 -163c0 -40 -30 -72 -67 -72c-31 0 -75 25 -75 75c0 38 27 77 72 77c4 0 9 0 14 -1c-28 37 -72 59 -120 59c-106 0 -113 -73 -113 -186v-51v-51c0 -113 7 -187 113 -187c80 0 139 70 158 151c2 7 7 10 12 10c6 0 13 -4 13 -12
+c0 -22 -50 -174 -183 -174c-59 0 -250 19 -250 263c0 62 18 262 250 262z" fill="currentColor"/>
+</g>
+<g transform="translate(0.8000, 8.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M266 -635h-6c-108 0 -195 88 -195 197c0 58 53 103 112 103c54 0 95 -47 95 -103c0 -52 -43 -95 -95 -95c-11 0 -21 2 -31 6c26 -39 68 -65 117 -65h4zM461 -203c68 24 113 90 113 164c0 90 -66 179 -173 190c19 -89 48 -242 60 -354zM74 28c0 -145 141 -247 264 -247
+c1 0 47 0 82 6c-7 64 -29 203 -63 364c-79 -8 -124 -61 -124 -119c0 -44 25 -91 81 -123c5 -5 7 -10 7 -15c0 -11 -10 -22 -22 -22c-15 0 -126 62 -126 187c0 88 58 174 160 197c-14 58 -29 117 -46 175c-107 -121 -213 -243 -213 -403zM250 553c-29 96 -52 170 -52 346
+c0 115 55 224 149 292c6 5 14 5 20 0c68 -80 133 -245 133 -358c0 -143 -86 -255 -180 -364c21 -68 39 -138 56 -207c2 0 7 1 13 1c155 0 256 -128 256 -261c0 -113 -74 -212 -180 -246c3 -35 5 -70 5 -105c0 -19 -1 -39 -2 -58c-7 -119 -88 -225 -202 -228l1 43
+c93 2 153 92 159 191c1 18 2 37 2 55c0 31 -1 61 -4 92c-5 -1 -44 -8 -89 -8c-193 0 -333 180 -333 374c0 177 131 306 248 441zM428 916c0 34 1 66 -20 129c-99 -48 -162 -149 -162 -259c0 -52 12 -115 36 -194c80 97 146 198 146 324z" fill="currentColor"/>
+</g>
+<g transform="translate(18.9460, 7.6243)">
+<rect x="-0.0650" y="-2.0000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(17.7068, 9.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+<g transform="translate(12.9415, 7.6243)">
+<rect x="-0.0650" y="-1.0000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(15.9437, 7.6243)">
+<rect x="-0.0650" y="-1.5000" width="0.1300" height="3.3139" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(14.7045, 9.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M218 136c66 0 108 -36 108 -89c0 -89 -113 -183 -218 -183c-66 0 -108 36 -108 89c0 89 113 183 218 183z" fill="currentColor"/>
+</g>
+</svg>
+
+<h2>Chord Progression</h2>
+<p>A simple chord progression:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" width="100%" height="17.00" viewBox="0 0.6242999999999999 45.6459 17">
+<style type="text/css">
+<![CDATA[
+tspan { white-space: pre; }
+]]>
+</style>
+<g transform="translate(0.0000, 9.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.6459" y2="0"/>
+</g>
+<g transform="translate(0.0000, 8.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.6459" y2="0"/>
+</g>
+<g transform="translate(0.0000, 7.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.6459" y2="0"/>
+</g>
+<g transform="translate(0.0000, 6.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.6459" y2="0"/>
+</g>
+<g transform="translate(0.0000, 5.6243)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.6459" y2="0"/>
+</g>
+<g transform="translate(27.3558, 7.6243)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(35.5059, 7.6243)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(17.5008, 7.6243)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="28.9553" y="-0.1000" width="2.9430" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="22.5218" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 11.6243)">
+<rect x="22.5218" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="18.2464" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 11.6243)">
+<rect x="18.2464" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 12.6243)">
+<rect x="18.2464" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="12.6310" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 11.6243)">
+<rect x="12.6310" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(0.0000, 10.6243)">
+<rect x="8.3557" y="-0.1000" width="2.0660" height="0.2000" ry="0.1000" fill="currentColor"/>
+</g>
+<g transform="translate(22.8662, 10.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(29.4458, 8.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M213 112c-45 0 -69 -34 -69 -88c0 -102 89 -136 134 -136s69 34 69 88c0 102 -89 136 -134 136zM245 136c144 0 246 -65 246 -136s-102 -136 -246 -136s-245 65 -245 136s101 136 245 136z" fill="currentColor"/>
+</g>
+<g transform="translate(29.4458, 9.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M213 112c-45 0 -69 -34 -69 -88c0 -102 89 -136 134 -136s69 34 69 88c0 102 -89 136 -134 136zM245 136c144 0 246 -65 246 -136s-102 -136 -246 -136s-245 65 -245 136s101 136 245 136z" fill="currentColor"/>
+</g>
+<g transform="translate(29.4458, 10.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M213 112c-45 0 -69 -34 -69 -88c0 -102 89 -136 134 -136s69 34 69 88c0 102 -89 136 -134 136zM245 136c144 0 246 -65 246 -136s-102 -136 -246 -136s-245 65 -245 136s101 136 245 136z" fill="currentColor"/>
+</g>
+<g transform="translate(24.1785, 7.6243)">
+<rect x="-0.0650" y="-1.0000" width="0.1300" height="5.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(22.8662, 11.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(22.8662, 12.1243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(10.0123, 7.6243)">
+<rect x="-0.0650" y="-2.5000" width="0.1300" height="5.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(5.0000, 7.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M250 262c116 0 176 -106 176 -163c0 -40 -30 -72 -67 -72c-31 0 -75 25 -75 75c0 38 27 77 72 77c4 0 9 0 14 -1c-28 37 -72 59 -120 59c-106 0 -113 -73 -113 -186v-51v-51c0 -113 7 -187 113 -187c80 0 139 70 158 151c2 7 7 10 12 10c6 0 13 -4 13 -12
+c0 -22 -50 -174 -183 -174c-59 0 -250 19 -250 263c0 62 18 262 250 262z" fill="currentColor"/>
+</g>
+<g transform="translate(0.8000, 8.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M266 -635h-6c-108 0 -195 88 -195 197c0 58 53 103 112 103c54 0 95 -47 95 -103c0 -52 -43 -95 -95 -95c-11 0 -21 2 -31 6c26 -39 68 -65 117 -65h4zM461 -203c68 24 113 90 113 164c0 90 -66 179 -173 190c19 -89 48 -242 60 -354zM74 28c0 -145 141 -247 264 -247
+c1 0 47 0 82 6c-7 64 -29 203 -63 364c-79 -8 -124 -61 -124 -119c0 -44 25 -91 81 -123c5 -5 7 -10 7 -15c0 -11 -10 -22 -22 -22c-15 0 -126 62 -126 187c0 88 58 174 160 197c-14 58 -29 117 -46 175c-107 -121 -213 -243 -213 -403zM250 553c-29 96 -52 170 -52 346
+c0 115 55 224 149 292c6 5 14 5 20 0c68 -80 133 -245 133 -358c0 -143 -86 -255 -180 -364c21 -68 39 -138 56 -207c2 0 7 1 13 1c155 0 256 -128 256 -261c0 -113 -74 -212 -180 -246c3 -35 5 -70 5 -105c0 -19 -1 -39 -2 -58c-7 -119 -88 -225 -202 -228l1 43
+c93 2 153 92 159 191c1 18 2 37 2 55c0 31 -1 61 -4 92c-5 -1 -44 -8 -89 -8c-193 0 -333 180 -333 374c0 177 131 306 248 441zM428 916c0 34 1 66 -20 129c-99 -48 -162 -149 -162 -259c0 -52 12 -115 36 -194c80 97 146 198 146 324z" fill="currentColor"/>
+</g>
+<g transform="translate(8.7000, 8.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(8.7000, 9.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(8.7000, 10.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(18.5908, 12.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(19.9031, 7.6243)">
+<rect x="-0.0650" y="-0.5000" width="0.1300" height="5.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(18.5908, 10.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(18.5908, 11.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(14.2877, 7.6243)">
+<rect x="-0.0650" y="-1.5000" width="0.1300" height="5.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(12.9754, 9.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(12.9754, 10.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(12.9754, 11.6243)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+</svg>
+
+<h2>Bass Line</h2>
+<p>And here's a corresponding bass line:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" width="100%" height="14.50" viewBox="0 0 45.3946 14.5">
+<style type="text/css">
+<![CDATA[
+tspan { white-space: pre; }
+]]>
+</style>
+<g transform="translate(0.0000, 8.8453)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.3946" y2="0"/>
+</g>
+<g transform="translate(0.0000, 7.8453)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.3946" y2="0"/>
+</g>
+<g transform="translate(0.0000, 6.8453)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.3946" y2="0"/>
+</g>
+<g transform="translate(0.0000, 5.8453)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.3946" y2="0"/>
+</g>
+<g transform="translate(0.0000, 4.8453)">
+<line stroke-linejoin="round" stroke-linecap="round" stroke-width="0.1000" stroke="currentColor" x1="0.0500" y1="0" x2="35.3946" y2="0"/>
+</g>
+<g transform="translate(27.1046, 6.8453)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(35.2546, 6.8453)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(17.2323, 6.8453)">
+<rect x="0.0000" y="-2.0000" width="0.1900" height="4.0000" ry="0.0000" fill="currentColor"/>
+</g>
+<g transform="translate(29.1946, 7.3453)">
+<path transform="scale(0.0040, -0.0040)" d="M213 112c-45 0 -69 -34 -69 -88c0 -102 89 -136 134 -136s69 34 69 88c0 102 -89 136 -134 136zM245 136c144 0 246 -65 246 -136s-102 -136 -246 -136s-245 65 -245 136s101 136 245 136z" fill="currentColor"/>
+</g>
+<g transform="translate(23.9100, 6.8453)">
+<rect x="-0.0650" y="-1.5000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(22.5977, 8.8453)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(10.0123, 6.8453)">
+<rect x="-0.0650" y="-3.0000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(5.0000, 6.8453)">
+<path transform="scale(0.0040, -0.0040)" d="M250 262c116 0 176 -106 176 -163c0 -40 -30 -72 -67 -72c-31 0 -75 25 -75 75c0 38 27 77 72 77c4 0 9 0 14 -1c-28 37 -72 59 -120 59c-106 0 -113 -73 -113 -186v-51v-51c0 -113 7 -187 113 -187c80 0 139 70 158 151c2 7 7 10 12 10c6 0 13 -4 13 -12
+c0 -22 -50 -174 -183 -174c-59 0 -250 19 -250 263c0 62 18 262 250 262z" fill="currentColor"/>
+</g>
+<g transform="translate(0.8000, 5.8453)">
+<path transform="scale(0.0040, -0.0040)" d="M557 -125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM557 125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM232 263c172 0 293 -88 293 -251c0 -263 -263 -414 -516 -521c-3 -3 -6 -4 -9 -4c-7 0 -13 6 -13 13c0 3 1 6 4 9
+c202 118 412 265 412 493c0 120 -63 235 -171 235c-74 0 -129 -54 -154 -126c11 5 22 8 34 8c55 0 100 -45 100 -100c0 -58 -44 -106 -100 -106c-60 0 -112 47 -112 106c0 133 102 244 232 244z" fill="currentColor"/>
+</g>
+<g transform="translate(8.7000, 7.3453)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(18.3223, 9.3453)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+<g transform="translate(19.6346, 6.8453)">
+<rect x="-0.0650" y="-1.0000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(14.0377, 6.8453)">
+<rect x="-0.0650" y="-2.0000" width="0.1300" height="3.2410" ry="0.0400" fill="currentColor"/>
+</g>
+<g transform="translate(12.7254, 8.3453)">
+<path transform="scale(0.0040, -0.0040)" d="M314 65c0 23 -19 41 -42 41c-39 0 -204 -110 -231 -143c-7 -8 -10 -18 -10 -28c0 -23 19 -41 42 -41c39 0 203 110 230 143c7 8 11 18 11 28zM262 136c41 0 82 -14 82 -71c0 -26 -16 -112 -74 -151c-25 -17 -87 -50 -187 -50c-41 0 -83 14 -83 71c0 26 16 112 74 151
+c25 17 88 50 188 50z" fill="currentColor"/>
+</g>
+</svg>
+
+<h2>Guitar Chords</h2>
+<p>Here are some common guitar chord diagrams:</p>
+<h3>C Major Chord</h3>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" preserveAspectRatio="xMidYMid meet" viewBox="0 0 400 480"><text x="200" y="-1.7999992370605469" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="48" text-anchor="middle" fill="#000000" class="title"><tspan dy="62.400000000000006" x="200">C Major</tspan></text><line x1="79" y1="85.20000610351562" x2="321" y2="85.20000610351562" stroke-width="10" stroke="#000000"></line><line x1="80" y1="162.20000610351562" x2="320" y2="162.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="234.20000610351562" x2="320" y2="234.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="306.20000610351565" x2="320" y2="306.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="378.20000610351565" x2="320" y2="378.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="90.20000610351562" x2="80" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="128" y1="90.20000610351562" x2="128" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="176" y1="90.20000610351562" x2="176" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="224" y1="90.20000610351562" x2="224" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="272" y1="90.20000610351562" x2="272" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="320" y1="90.20000610351562" x2="320" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line></svg>
+<h3>F Major Barre Chord</h3>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" preserveAspectRatio="xMidYMid meet" viewBox="0 0 400 385.40000610351564"><text x="200" y="-1.7999992370605469" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="48" text-anchor="middle" fill="#000000" class="title"><tspan dy="62.400000000000006" x="200">F Major</tspan></text><line x1="79" y1="85.20000610351562" x2="321" y2="85.20000610351562" stroke-width="10" stroke="#000000"></line><line x1="80" y1="162.20000610351562" x2="320" y2="162.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="234.20000610351562" x2="320" y2="234.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="306.20000610351565" x2="320" y2="306.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="378.20000610351565" x2="320" y2="378.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="90.20000610351562" x2="80" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="128" y1="90.20000610351562" x2="128" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="176" y1="90.20000610351562" x2="176" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="224" y1="90.20000610351562" x2="224" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="272" y1="90.20000610351562" x2="272" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="320" y1="90.20000610351562" x2="320" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><rect width="264" height="31.200000000000003" x="68" y="110.10000610351562" fill="#000000" stroke-width="0" stroke="#000000" rx="7.800000000000001" ry="7.800000000000001" class="barre barre-fret-0"></rect><text x="200" y="125.70000610351562" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="central" fill="#ffffff" class="barre-text barre-text-1">1</text><circle r="15.600000000000001" cx="320" cy="126.20000610351562" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-5 finger-fret-0 finger-string-5-fret-0 finger-circle"></circle><circle r="15.600000000000001" cx="272" cy="126.20000610351562" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-4 finger-fret-0 finger-string-4-fret-0 finger-circle"></circle><circle r="15.600000000000001" cx="224" cy="270.20000610351565" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-3 finger-fret-2 finger-string-3-fret-2 finger-circle"></circle><text x="224" y="270.20000610351565" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="central" fill="#ffffff" class="finger finger-string-3 finger-fret-2 finger-string-3-fret-2 finger-text">3</text><circle r="15.600000000000001" cx="176" cy="270.20000610351565" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-2 finger-fret-2 finger-string-2-fret-2 finger-circle"></circle><text x="176" y="270.20000610351565" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="central" fill="#ffffff" class="finger finger-string-2 finger-fret-2 finger-string-2-fret-2 finger-text">4</text><circle r="15.600000000000001" cx="128" cy="198.20000610351562" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-1 finger-fret-1 finger-string-1-fret-1 finger-circle"></circle><text x="128" y="198.20000610351562" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="central" fill="#ffffff" class="finger finger-string-1 finger-fret-1 finger-string-1-fret-1 finger-text">2</text><circle r="15.600000000000001" cx="80" cy="126.20000610351562" fill="#000000" stroke-width="0" stroke="#000000" class="finger finger-string-0 finger-fret-0 finger-string-0-fret-0 finger-circle"></circle><circle r="0" cx="0" cy="0" fill="none" stroke-width="0" stroke="transparent" class="top-left"></circle><circle r="0" cx="400" cy="0" fill="none" stroke-width="0" stroke="transparent" class="top-right"></circle></svg>
+<h3>G Major Chord</h3>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" preserveAspectRatio="xMidYMid meet" viewBox="0 0 400 480"><text x="200" y="-1.7999992370605469" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="48" text-anchor="middle" fill="#000000" class="title"><tspan dy="62.400000000000006" x="200">G Major</tspan></text><line x1="79" y1="85.20000610351562" x2="321" y2="85.20000610351562" stroke-width="10" stroke="#000000"></line><line x1="80" y1="162.20000610351562" x2="320" y2="162.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="234.20000610351562" x2="320" y2="234.20000610351562" stroke-width="2" stroke="#000000"></line><line x1="80" y1="306.20000610351565" x2="320" y2="306.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="378.20000610351565" x2="320" y2="378.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="80" y1="90.20000610351562" x2="80" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="128" y1="90.20000610351562" x2="128" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="176" y1="90.20000610351562" x2="176" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="224" y1="90.20000610351562" x2="224" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="272" y1="90.20000610351562" x2="272" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line><line x1="320" y1="90.20000610351562" x2="320" y2="379.20000610351565" stroke-width="2" stroke="#000000"></line></svg>
+<h3>Complex Chord Example</h3>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" preserveAspectRatio="xMidYMid meet" viewBox="0 0 400 480"><text x="200" y="-1.7999992370605469" font-family="Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif" font-size="40.82531853678586" text-anchor="middle" fill="#000000" class="title"><tspan dy="53.07289" x="200">Custom Styled Chord</tspan></text><line x1="113.6" y1="69.87289199829101" x2="142.39999999999998" y2="98.672891998291" stroke-width="2" stroke="#000000"></line><line x1="113.6" y1="98.672891998291" x2="142.39999999999998" y2="69.87289199829101" stroke-width="2" stroke="#000000"></line><line x1="65.6" y1="69.87289199829101" x2="94.39999999999999" y2="98.672891998291" stroke-width="2" stroke="#000000"></line><line x1="65.6" y1="98.672891998291" x2="94.39999999999999" y2="69.87289199829101" stroke-width="2" stroke="#000000"></line><line x1="79" y1="113.27289199829102" x2="321" y2="113.27289199829102" stroke-width="10" stroke="#000000"></line><line x1="80" y1="190.27289199829102" x2="320" y2="190.27289199829102" stroke-width="2" stroke="#000000"></line><line x1="80" y1="262.272891998291" x2="320" y2="262.272891998291" stroke-width="2" stroke="#000000"></line><line x1="80" y1="334.272891998291" x2="320" y2="334.272891998291" stroke-width="2" stroke="#000000"></line><line x1="80" y1="406.272891998291" x2="320" y2="406.272891998291" stroke-width="2" stroke="#000000"></line><line x1="80" y1="118.27289199829102" x2="80" y2="407.272891998291" stroke-width="2" stroke="#000000"></line><line x1="128" y1="118.27289199829102" x2="128" y2="407.272891998291" stroke-width="2" stroke="#000000"></line><line x1="176" y1="118.27289199829102" x2="176" y2="407.272891998291" stroke-width="2" stroke="#000000"></line><line x1="224" y1="118.27289199829102" x2="224" y2="407.272891998291" stroke-width="2" stroke="#000000"></line><line x1="272" y1="118.27289199829102" x2="272" y2="407.272891998291" stroke-width="2" stroke="#000000"></line><line x1="320" y1="118.27289199829102" x2="320" y2="407.272891998291" stroke-width="2" stroke="#000000"></line></svg>
+<p>This markdown file can be processed by both the remark-lilypond and remark-svguitar plugins to generate HTML with embedded SVG musical notation and guitar chord diagrams.</p>
+
+</body>
+</html>
