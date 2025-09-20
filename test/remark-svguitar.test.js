@@ -308,6 +308,111 @@ describe("Plugin configuration", () => {
   });
 });
 
+describe("Multiple chord support", () => {
+  test("should handle multiple chords in array format", async () => {
+    const input = `\`\`\`svguitar
+[
+  {
+    "fingers": [
+      [1, 3, "3"],
+      [2, 2, "2"],
+      [5, 1, "1"]
+    ],
+    "title": "C Major"
+  },
+  {
+    "fingers": [
+      [1, 3, "3"],
+      [5, 2, "2"],
+      [6, 3, "4"]
+    ],
+    "title": "G Major"
+  }
+]
+\`\`\``;
+
+    const processor = remark().use(remarkSvguitar, {
+      skipOnMissing: true, // Skip if Puppeteer not available
+    });
+
+    await assert.doesNotReject(async () => {
+      const result = await processor.process(input);
+      const output = result.toString();
+      assert.ok(typeof output === "string", "Should return a string");
+      assert.ok(output.length > 0, "Should return non-empty content");
+    });
+  });
+
+  test("should handle single chord (backward compatibility)", async () => {
+    const input = `\`\`\`svguitar
+{
+  "fingers": [
+    [1, 3, "3"],
+    [2, 2, "2"],
+    [5, 1, "1"]
+  ],
+  "title": "C Major"
+}
+\`\`\``;
+
+    const processor = remark().use(remarkSvguitar, {
+      skipOnMissing: true,
+    });
+
+    await assert.doesNotReject(async () => {
+      const result = await processor.process(input);
+      const output = result.toString();
+      assert.ok(typeof output === "string", "Should return a string");
+      assert.ok(output.length > 0, "Should return non-empty content");
+    });
+  });
+
+  test("should handle empty array gracefully", async () => {
+    const input = `\`\`\`svguitar
+[]
+\`\`\``;
+
+    const processor = remark().use(remarkSvguitar, {
+      skipOnMissing: true,
+    });
+
+    await assert.doesNotReject(async () => {
+      const result = await processor.process(input);
+      const output = result.toString();
+      assert.ok(typeof output === "string", "Should return a string");
+    });
+  });
+
+  test("should handle mixed valid and invalid chords in array", async () => {
+    const input = `\`\`\`svguitar
+[
+  {
+    "fingers": [
+      [1, 3, "3"],
+      [2, 2, "2"]
+    ],
+    "title": "Valid Chord"
+  },
+  {
+    "fingers": "invalid",
+    "title": "Invalid Chord"
+  }
+]
+\`\`\``;
+
+    const processor = remark().use(remarkSvguitar, {
+      skipOnMissing: true,
+      errorInline: true,
+    });
+
+    await assert.doesNotReject(async () => {
+      const result = await processor.process(input);
+      const output = result.toString();
+      assert.ok(typeof output === "string", "Should return a string");
+    });
+  });
+});
+
 describe("Cleanup", () => {
   test("should provide closeBrowser function", () => {
     assert.ok(

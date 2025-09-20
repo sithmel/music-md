@@ -2,6 +2,12 @@
 
 A markdown renderer that converts markdown files to HTML or PDF with music notation support. Features specialized extensions for LilyPond musical notation and guitar fretboard diagrams.
 
+## TODO
+- [ ] there should be a command line available (see the demo)
+- [ ] there should be a function generating the chords from the voicings (maybe not in this project)
+- [ ] it should support conversion to pdf and forced page break
+- [ ] review code and documentation
+
 ## Features
 
 - **Multiple Output Formats**: Generate static HTML or PDF from markdown

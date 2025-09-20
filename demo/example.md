@@ -126,4 +126,80 @@ Here are some common guitar chord diagrams:
 }
 ```
 
+## Multiple Chords in One Block
+
+You can also display multiple chord diagrams together by using an array:
+
+### Common Chord Progression (C-Am-F-G)
+
+```svguitar
+[
+  {
+    "fingers": [
+      [1, 3, "3"],
+      [2, 2, "2"],
+      [5, 1, "1"]
+    ],
+    "title": "C Major"
+  },
+  {
+    "fingers": [
+      [2, 2, "2"],
+      [3, 2, "3"],
+      [4, 2, "4"]
+    ],
+    "title": "A Minor"
+  },
+  {
+    "fingers": [
+      [1, 1],
+      [2, 1],
+      [3, 3, "3"],
+      [4, 3, "4"],
+      [5, 2, "2"],
+      [6, 1]
+    ],
+    "barres": [
+      {
+        "fromString": 6,
+        "toString": 1,
+        "fret": 1,
+        "text": "1"
+      }
+    ],
+    "title": "F Major",
+    "position": 1
+  },
+  {
+    "fingers": [
+      [1, 3, "3"],
+      [5, 2, "2"],
+      [6, 3, "4"]
+    ],
+    "title": "G Major"
+  }
+]
+```
+
+### Power Chord Sequence
+
+```svguitar
+[
+  {
+    "fingers": [
+      [5, 3, "1"],
+      [6, 3, "1"]
+    ],
+    "title": "A5"
+  },
+  {
+    "fingers": [
+      [4, 3, "1"],
+      [5, 3, "1"]
+    ],
+    "title": "D5"
+  }
+]
+```
+
 This markdown file can be processed by both the remark-lilypond and remark-svguitar plugins to generate HTML with embedded SVG musical notation and guitar chord diagrams.

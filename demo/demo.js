@@ -66,6 +66,34 @@ async function runDemo() {
             max-width: 100%;
             height: auto;
         }
+        .chord-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            max-width: 100%;
+            gap: 20px;
+            align-items: start;
+            justify-content: center;
+        }
+        @supports not (display: grid) {
+            .chord-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                align-items: flex-start;
+            }
+        }
+        .chord-container:has(.chord-item:nth-child(2)) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .chord-container:has(.chord-item:nth-child(3)) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .chord-container:has(.chord-item:nth-child(4)) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .chord-container:has(.chord-item:nth-child(5)) {
+            grid-template-columns: repeat(4, 1fr);
+        }
         pre {
             background-color: #f5f5f5;
             padding: 15px;
