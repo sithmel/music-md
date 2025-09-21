@@ -1,3 +1,4 @@
+//@ts-check
 /**
  * @fileoverview Remark plugin for converting SVGuitar code blocks to inline SVG
  */
@@ -10,11 +11,27 @@ import puppeteer from "puppeteer";
  * @property {boolean} [errorInline=false] - Whether to display errors inline or log to console
  * @property {boolean} [skipOnMissing=false] - Skip processing if Puppeteer fails to launch
  * @property {Object} [puppeteerOptions={}] - Options to pass to puppeteer.launch()
+ * @property {Object} [SVGuitarConfig={}] - Default configuration options for SVGuitar rendering
  */
 
 // Global browser instance for performance
 let browserInstance = null;
 
+/**
+ * Normalize chord data to ensure consistent structure
+ * @param {Object[]} chordData 
+ * @returns 
+ */
+function normaliseChordData(chordData) {
+  // Ensure all chord objects have the same structure
+  return chordData.map(chord => ({barres: chord.barres || [], ...chord
+  }));
+}
+
+function adaptConfigToChord(chord, defaultConfig) {
+  const frets = Math.max(...chord.fingers.map(f => typeof f[1] === 'number' ? f[1] : 0), ...(chord.barres || []).map(b => b.fret), 3);
+  return {...defaultConfig, frets}
+}
 /**
  * Remark plugin to transform SVGuitar code blocks into inline SVG images
  * @param {SVGuitarOptions} [options={}] - Plugin configuration options
@@ -25,6 +42,7 @@ function remarkSvguitar(options = {}) {
     errorInline = false,
     skipOnMissing = false,
     puppeteerOptions = {},
+    SVGuitarConfig = {},
   } = options;
 
   /**
@@ -91,10 +109,11 @@ function remarkSvguitar(options = {}) {
         }
 
         // Normalize to array format (single chord or multiple chords)
-        const chordDataArray = Array.isArray(parsedData) ? parsedData : [parsedData];
+        const chordDataArray = normaliseChordData(Array.isArray(parsedData) ? parsedData : [parsedData]);
 
+        const SVGuitarConfigArray = chordDataArray.map((chord) => adaptConfigToChord(chord, SVGuitarConfig));
         // Render the chords using Puppeteer with unique block ID
-        const svgContent = await renderChordsWithPuppeteer(chordDataArray, blockIndex);
+        const svgContent = await renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, blockIndex);
 
         // Replace the code block with an HTML node containing inline SVG
         parent.children[index] = {
@@ -117,10 +136,11 @@ function remarkSvguitar(options = {}) {
 /**
  * Renders multiple chord diagrams using Puppeteer and headless Chrome
  * @param {Array} chordDataArray - Array of chord data objects to render
+ * @param {Object[]} SVGuitarConfigArray - Default configuration options for SVGuitar rendering
  * @param {number} blockId - Unique identifier for this code block
  * @returns {Promise<string>} The rendered SVG content for all chords
  */
-async function renderChordsWithPuppeteer(chordDataArray, blockId) {
+async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, blockId) {
   const page = await browserInstance.newPage();
 
   try {
@@ -196,6 +216,7 @@ async function renderChordsWithPuppeteer(chordDataArray, blockId) {
                 }
 
                 const chordDataArray = ${JSON.stringify(chordDataArray)};
+                const SVGuitarConfigArray = ${JSON.stringify(SVGuitarConfigArray)};
                 console.log('Rendering chord data array:', chordDataArray);
 
                 // Render each chord in its own container
@@ -203,12 +224,16 @@ async function renderChordsWithPuppeteer(chordDataArray, blockId) {
                     try {
                         const chart = new svguitar.SVGuitarChord(\`#chord-block${blockId}-\${index}\`);
 
+                        // Configure chart with defaults first to initialize required properties
+                        chart.configure(SVGuitarConfigArray[index] || {});
+
                         // Draw chord - catch any internal SVGuitar errors but continue
                         try {
                             chart.chord(chordData).draw();
                         } catch (drawError) {
                             // SVGuitar may still have created the SVG despite internal errors
-                            console.warn(\`SVGuitar internal warning for chord \${index}: \${drawError.message}\`);
+                            console.error(\`SVGuitar internal error for chord \${index}: \${drawError.message}\`);
+                            console.error(\`Error stack: \${drawError.stack}\`);
                         }
                     } catch (error) {
                         console.error(\`SVGuitar error for chord \${index}:\`, error);
