@@ -1,6 +1,6 @@
 {
   "name": "music-md",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A markdown renderer that converts markdown files to HTML or PDF with music notation support",
   "main": "index.js",
   "types": "types/index.d.ts",
