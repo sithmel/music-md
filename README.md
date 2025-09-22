@@ -2,12 +2,6 @@
 
 A markdown renderer that converts markdown files to HTML or PDF with music notation support. Features specialized extensions for LilyPond musical notation and guitar fretboard diagrams.
 
-## TODO
-- [ ] there should be a command line available (see the demo)
-- [ ] there should be a function generating the chords from the voicings (maybe not in this project)
-- [ ] it should support conversion to pdf and forced page break
-- [ ] review code and documentation
-
 ## Features
 
 - **Multiple Output Formats**: Generate static HTML or PDF from markdown
@@ -313,6 +307,42 @@ The SVGuitar plugin expects JSON chord data in the following format:
 **Advanced Styling:**
 
 ```javascript
+
+### Multiple Chords In One Block
+
+You can render multiple chord diagrams from a single fenced block by providing an array of chord objects instead of a single object. Each array element follows the same schema (fingers, optional barres, title, position, styling) and produces its own SVG.
+
+````markdown
+```svguitar
+[
+  {
+    "title": "C",
+    "fingers": [
+      [1, 0], [2, 1, "1"], [3, 0], [4, 2, "2"], [5, 3, "3"], [6, "x"]
+    ]
+  },
+  {
+    "title": "G",
+    "fingers": [
+      [1, 3, "3"], [2, 0], [3, 0], [4, 0], [5, 2, "1"], [6, 3, "2"]
+    ]
+  },
+  {
+    "title": "F",
+    "barres": [{ "fromString": 6, "toString": 1, "fret": 1, "text": "1" }],
+    "fingers": [
+      [5, 3, "3"], [4, 3, "4"], [3, 2, "2"], [2, 1], [1, 1], [6, 1]
+    ]
+  }
+]
+```
+````
+
+Notes:
+- A top-level JSON array is the simplest form.
+- (Optional) A wrapper object like `{ "chords": [ ... ] }` can also be supported if desired; prefer the plain array for brevity.
+- If one chord fails to render (e.g. invalid JSON for that element), other chords are still processed. With `errorInline: true`, the failed chord's slot will display an inline error message.
+
 {
   "fingers": [
     [1, 2, { "text": "2", "color": "#ff6b6b" }],
@@ -393,6 +423,57 @@ const processor = remark()
   .use(rehypeRaw)
   .use(rehypeStringify);
 ```
+
+## TypeScript Usage
+
+Full TypeScript definitions are included. You can import the plugins and option types:
+
+```ts
+import { remark } from "remark";
+import remarkHtml from "remark-html";
+import {
+  remarkLilypond,
+  remarkSvguitar,
+  closeBrowser,
+  type LilyPondOptions,
+  type SVGuitarOptions,
+} from "music-md";
+
+const lilyOptions: LilyPondOptions = { compact: true };
+const svguitarOptions: SVGuitarOptions = { keepAlive: true };
+
+const processor = remark()
+  .use(remarkLilypond, lilyOptions)
+  .use(remarkSvguitar, svguitarOptions)
+  .use(remarkHtml, { sanitize: false });
+
+const result = await processor.process(markdown);
+
+// When using keepAlive you should close the browser manually after all processing:
+await closeBrowser();
+```
+
+### SVGuitar keepAlive Option
+
+The `keepAlive` option (default `false`) trades memory for speed across multiple markdown files:
+
+```js
+const processor = remark()
+  .use(remarkSvguitar, { keepAlive: true })
+  .use(remarkHtml, { sanitize: false });
+
+for (const file of files) {
+  await processor.process(await fs.promises.readFile(file, "utf8"));
+}
+
+await closeBrowser(); // Important when keepAlive = true
+```
+
+| Scenario                  | Recommendation                                              |
+| ------------------------- | ----------------------------------------------------------- |
+| Single file CLI run       | leave `keepAlive` false                                     |
+| Batch convert many files  | set `keepAlive: true`                                       |
+| Long-lived server process | set `keepAlive: true` and call `closeBrowser()` on shutdown |
 
 ## License
 

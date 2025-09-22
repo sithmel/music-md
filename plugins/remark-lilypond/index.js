@@ -1,3 +1,4 @@
+//@ts-check
 /**
  * @fileoverview Remark plugin for converting LilyPond code blocks to inline SVG
  */
@@ -14,9 +15,9 @@ import { render } from "lilynode";
  */
 
 /**
- * Remark plugin to transform LilyPond code blocks into inline SVG images
+ * Remark plugin to transform LilyPond code blocks into inline SVG images.
  * @param {LilyPondOptions} [options={}] - Plugin configuration options
- * @returns {Function} The transformer function
+ * @returns {(tree: import('unist').Node) => Promise<void>} Unified transformer
  */
 function remarkLilypond(options = {}) {
   const {
@@ -28,18 +29,24 @@ function remarkLilypond(options = {}) {
 
   /**
    * Transformer function that processes the AST
-   * @param {Object} tree - The AST tree
+   * @param {import('unist').Node & { children?: any[] }} tree - The AST tree
    * @returns {Promise<void>}
    */
   return async function transformer(tree) {
     const codeBlocks = [];
 
     // Collect all lilypond code blocks
-    visit(tree, "code", (node, index, parent) => {
-      if (node.lang === "lilypond") {
-        codeBlocks.push({ node, index, parent });
-      }
-    });
+    visit(
+      tree,
+      "code",
+      /** @type {any} */ (
+        (node, index, parent) => {
+          if (/** @type {any} */ (node).lang === "lilypond") {
+            codeBlocks.push({ node, index, parent });
+          }
+        }
+      ),
+    );
 
     // Skip processing if no LilyPond blocks found
     if (codeBlocks.length === 0) {
@@ -53,12 +60,7 @@ function remarkLilypond(options = {}) {
         let lilypondCode = node.value;
         if (compact) {
           // Remove tagline and margins, use ragged-right for natural width
-          lilypondCode = `\\paper {
-            indent = 0
-            ragged-right = ##t
-            right-margin = 0
-            left-margin = 0
-          }\n\\header { tagline = "" }\n${lilypondCode}`;
+          lilypondCode = `\\paper {\n            indent = 0\n            ragged-right = ##t\n            right-margin = 0\n            left-margin = 0\n          }\n\\header { tagline = "" }\n${lilypondCode}`;
         }
 
         const svgBuffer = await render(lilypondCode, {
@@ -240,7 +242,7 @@ function isLilyPondNotFound(error) {
   return (
     error.message.includes("not found") ||
     error.message.includes("ENOENT") ||
-    error.code === "ENOENT"
+    ("code" in error && error.code === "ENOENT")
   );
 }
 

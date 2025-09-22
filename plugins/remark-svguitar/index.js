@@ -5,37 +5,71 @@
 
 import { visit } from "unist-util-visit";
 import puppeteer from "puppeteer";
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * @typedef {Object} SVGuitarOptions
  * @property {boolean} [errorInline=false] - Whether to display errors inline or log to console
  * @property {boolean} [skipOnMissing=false] - Skip processing if Puppeteer fails to launch
  * @property {Object} [puppeteerOptions={}] - Options to pass to puppeteer.launch()
- * @property {Object} [SVGuitarConfig={}] - Default configuration options for SVGuitar rendering
+ * @property {import("svguitar").ChordSettings} [SVGuitarConfig={}] - Default configuration options for SVGuitar rendering
+ * @property {boolean} [keepAlive=false] - Keep the Puppeteer browser open between processor runs for performance
  */
 
 // Global browser instance for performance
 let browserInstance = null;
 
+// Read the svguitar library once at startup
+let svguitarLibrary = null;
+
+/**
+ * Get the svguitar library content directly from node_modules, reading it once and caching it
+ * @returns {string} The svguitar library content
+ */
+function getSvguitarLibrary() {
+  if (!svguitarLibrary) {
+    try {
+      const svguitarPath = join(
+        __dirname,
+        "../../node_modules/svguitar/dist/svguitar.umd.js",
+      );
+      svguitarLibrary = readFileSync(svguitarPath, "utf8");
+    } catch (error) {
+      throw new Error(
+        `Failed to read svguitar library from node_modules: ${error.message}. Make sure svguitar is installed via npm.`,
+      );
+    }
+  }
+  return svguitarLibrary;
+}
+
 /**
  * Normalize chord data to ensure consistent structure
- * @param {Object[]} chordData 
- * @returns 
+ * @param {Object[]} chordData
+ * @returns
  */
 function normaliseChordData(chordData) {
   // Ensure all chord objects have the same structure
-  return chordData.map(chord => ({barres: chord.barres || [], ...chord
-  }));
+  return chordData.map((chord) => ({ barres: chord.barres || [], ...chord }));
 }
 
 function adaptConfigToChord(chord, defaultConfig) {
-  const frets = Math.max(...chord.fingers.map(f => typeof f[1] === 'number' ? f[1] : 0), ...(chord.barres || []).map(b => b.fret), 3);
-  return {...defaultConfig, frets}
+  const frets = Math.max(
+    ...chord.fingers.map((f) => (typeof f[1] === "number" ? f[1] : 0)),
+    ...(chord.barres || []).map((b) => b.fret),
+    3,
+  );
+  return { ...defaultConfig, frets };
 }
 /**
  * Remark plugin to transform SVGuitar code blocks into inline SVG images
  * @param {SVGuitarOptions} [options={}] - Plugin configuration options
- * @returns {Function} The transformer function
+ * @returns {(tree: import('unist').Node) => Promise<void>} Unified transformer
  */
 function remarkSvguitar(options = {}) {
   const {
@@ -43,6 +77,7 @@ function remarkSvguitar(options = {}) {
     skipOnMissing = false,
     puppeteerOptions = {},
     SVGuitarConfig = {},
+    keepAlive = false,
   } = options;
 
   /**
@@ -54,11 +89,17 @@ function remarkSvguitar(options = {}) {
     const codeBlocks = [];
 
     // Collect all svguitar code blocks
-    visit(tree, "code", (node, index, parent) => {
-      if (node.lang === "svguitar") {
-        codeBlocks.push({ node, index, parent });
-      }
-    });
+    visit(
+      tree,
+      "code",
+      /** @type {any} */ (
+        (node, index, parent) => {
+          if (/** @type {any} */ (node).lang === "svguitar") {
+            codeBlocks.push({ node, index, parent });
+          }
+        }
+      ),
+    );
 
     // Skip processing if no SVGuitar blocks found
     if (codeBlocks.length === 0) {
@@ -109,11 +150,19 @@ function remarkSvguitar(options = {}) {
         }
 
         // Normalize to array format (single chord or multiple chords)
-        const chordDataArray = normaliseChordData(Array.isArray(parsedData) ? parsedData : [parsedData]);
+        const chordDataArray = normaliseChordData(
+          Array.isArray(parsedData) ? parsedData : [parsedData],
+        );
 
-        const SVGuitarConfigArray = chordDataArray.map((chord) => adaptConfigToChord(chord, SVGuitarConfig));
+        const SVGuitarConfigArray = chordDataArray.map((chord) =>
+          adaptConfigToChord(chord, SVGuitarConfig),
+        );
         // Render the chords using Puppeteer with unique block ID
-        const svgContent = await renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, blockIndex);
+        const svgContent = await renderChordsWithPuppeteer(
+          chordDataArray,
+          SVGuitarConfigArray,
+          blockIndex,
+        );
 
         // Replace the code block with an HTML node containing inline SVG
         parent.children[index] = {
@@ -130,27 +179,39 @@ function remarkSvguitar(options = {}) {
         // If not inline, keep the original code block and log error
       }
     }
+
+    // Close the browser unless keepAlive requested
+    if (!keepAlive) {
+      await closeBrowser();
+    }
   };
 }
 
 /**
  * Renders multiple chord diagrams using Puppeteer and headless Chrome
  * @param {Array} chordDataArray - Array of chord data objects to render
- * @param {Object[]} SVGuitarConfigArray - Default configuration options for SVGuitar rendering
+ * @param {import("svguitar").ChordSettings[]} SVGuitarConfigArray - Default configuration options for SVGuitar rendering
  * @param {number} blockId - Unique identifier for this code block
  * @returns {Promise<string>} The rendered SVG content for all chords
  */
-async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, blockId) {
+async function renderChordsWithPuppeteer(
+  chordDataArray,
+  SVGuitarConfigArray,
+  blockId,
+) {
   const page = await browserInstance.newPage();
 
   try {
-    // Create minimal HTML page with SVGuitar
+    // Get the svguitar library content
+    const svguitarScript = getSvguitarLibrary();
+
+    // Create minimal HTML page with SVGuitar embedded directly
     const html = `
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://unpkg.com/svguitar@2.4.1/dist/svguitar.umd.js"></script>
+    <script>${svguitarScript}</script>
     <style>
         body { margin: 0; padding: 20px; }
         .chord-container {
@@ -164,7 +225,7 @@ async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, bl
     </style>
 </head>
 <body>
-    <div class="chord-container">${chordDataArray.map((_, index) => `<div id="chord-block${blockId}-${index}" class="chord-item"></div>`).join('')}</div>
+    <div class="chord-container">${chordDataArray.map((_, index) => `<div id="chord-block${blockId}-${index}" class="chord-item"></div>`).join("")}</div>
     <script>
         function createErrorSVG(errorMessage) {
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -272,7 +333,7 @@ async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, bl
     await page.setContent(html);
 
     // Enable console logging for debugging
-    page.on('console', msg => {
+    page.on("console", (msg) => {
       for (let i = 0; i < msg.args().length; ++i) {
         console.log(`Console ${msg.type()}: ${msg.args()[i]}`);
       }
@@ -280,7 +341,9 @@ async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, bl
 
     // Wait for all chords to render (wait for at least one SVG per chord)
     for (let i = 0; i < chordDataArray.length; i++) {
-      await page.waitForSelector(`#chord-block${blockId}-${i} svg`, { timeout: 10000 });
+      await page.waitForSelector(`#chord-block${blockId}-${i} svg`, {
+        timeout: 10000,
+      });
     }
 
     // Extract all SVG content and combine them
@@ -302,37 +365,37 @@ async function renderChordsWithPuppeteer(chordDataArray, SVGuitarConfigArray, bl
   }
 }
 
-/**
- * Fixes SVG viewBox when height is zero by calculating actual content bounds
- * @param {string} svgContent - The SVG content string
- * @returns {string} Fixed SVG content
- */
-function fixSvgViewBox(svgContent) {
-  // Check if the viewBox has zero height
-  const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
-  if (!viewBoxMatch) {
-    return svgContent; // No viewBox found, return as-is
-  }
+// /**
+//  * Fixes SVG viewBox when height is zero by calculating actual content bounds
+//  * @param {string} svgContent - The SVG content string
+//  * @returns {string} Fixed SVG content
+//  */
+// function fixSvgViewBox(svgContent) {
+//   // Check if the viewBox has zero height
+//   const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
+//   if (!viewBoxMatch) {
+//     return svgContent; // No viewBox found, return as-is
+//   }
 
-  const [x, y, width, height] = viewBoxMatch[1].split(' ').map(parseFloat);
+//   const [x, y, width, height] = viewBoxMatch[1].split(' ').map(parseFloat);
 
-  // If height is not zero, return as-is
-  if (height > 0) {
-    return svgContent;
-  }
+//   // If height is not zero, return as-is
+//   if (height > 0) {
+//     return svgContent;
+//   }
 
-  // Calculate default height based on typical chord diagram proportions
-  // Standard guitar chord diagram is roughly 1.2:1 aspect ratio (height:width)
-  const calculatedHeight = width * 1.2;
+//   // Calculate default height based on typical chord diagram proportions
+//   // Standard guitar chord diagram is roughly 1.2:1 aspect ratio (height:width)
+//   const calculatedHeight = width * 1.2;
 
-  // Replace the viewBox with the calculated height
-  const fixedViewBox = `viewBox="${x} ${y} ${width} ${calculatedHeight}"`;
-  const fixedSvgContent = svgContent.replace(/viewBox="[^"]+"/, fixedViewBox);
+//   // Replace the viewBox with the calculated height
+//   const fixedViewBox = `viewBox="${x} ${y} ${width} ${calculatedHeight}"`;
+//   const fixedSvgContent = svgContent.replace(/viewBox="[^"]+"/, fixedViewBox);
 
-  console.log(`Fixed SVG viewBox: ${viewBoxMatch[1]} -> ${x} ${y} ${width} ${calculatedHeight}`);
+//   console.log(`Fixed SVG viewBox: ${viewBoxMatch[1]} -> ${x} ${y} ${width} ${calculatedHeight}`);
 
-  return fixedSvgContent;
-}
+//   return fixedSvgContent;
+// }
 
 /**
  * Fixes SVG viewBoxes for multiple SVGs in combined HTML content
@@ -346,7 +409,7 @@ function fixMultipleSvgViewBoxes(htmlContent) {
       return match; // No viewBox found, return as-is
     }
 
-    const [x, y, width, height] = viewBoxMatch[1].split(' ').map(parseFloat);
+    const [x, y, width, height] = viewBoxMatch[1].split(" ").map(parseFloat);
 
     // If height is not zero, return as-is
     if (height > 0) {
@@ -358,7 +421,9 @@ function fixMultipleSvgViewBoxes(htmlContent) {
     const fixedViewBox = `viewBox="${x} ${y} ${width} ${calculatedHeight}"`;
     const fixedMatch = match.replace(/viewBox="[^"]+"/, fixedViewBox);
 
-    console.log(`Fixed SVG viewBox: ${viewBoxMatch[1]} -> ${x} ${y} ${width} ${calculatedHeight}`);
+    console.log(
+      `Fixed SVG viewBox: ${viewBoxMatch[1]} -> ${x} ${y} ${width} ${calculatedHeight}`,
+    );
 
     return fixedMatch;
   });

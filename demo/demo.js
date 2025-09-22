@@ -1,3 +1,4 @@
+//@ts-check
 /**
  * @fileoverview Demo script for the remark-lilypond and remark-svguitar plugins
  */
@@ -123,10 +124,13 @@ ${result.toString()}
     console.log(
       `\nProcessed ${lilypondBlocks} LilyPond code blocks and ${svguitarBlocks} SVGuitar code blocks.`,
     );
-  } catch (error) {
+  } catch (err) {
+    // Normalize unknown exceptions so we can safely read .message
+    const error = err instanceof Error ? err : new Error(String(err));
+
     console.error("❌ Demo failed:", error.message);
 
-    if (error.message.includes("lilypond")) {
+    if (String(error.message).includes("lilypond")) {
       console.log(
         "\n💡 Make sure LilyPond is installed and available in your PATH.",
       );
@@ -138,7 +142,11 @@ ${result.toString()}
     process.exit(1);
   } finally {
     // Always clean up browser resources
-    await closeBrowser();
+    try {
+      await closeBrowser();
+    } catch (closeErr) {
+      // ignore cleanup errors
+    }
   }
 }
 

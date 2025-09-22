@@ -1,21 +1,21 @@
 export default remarkLilypond;
 export type LilyPondOptions = {
-    /**
-     * - Path to the LilyPond executable
-     */
-    binaryPath?: string;
-    /**
-     * - Whether to display errors inline or log to console
-     */
-    errorInline?: boolean;
-    /**
-     * - Skip processing if LilyPond is not available
-     */
-    skipOnMissing?: boolean;
-    /**
-     * - Remove tagline and crop whitespace from SVG output
-     */
-    compact?: boolean;
+  /**
+   * - Path to the LilyPond executable
+   */
+  binaryPath?: string;
+  /**
+   * - Whether to display errors inline or log to console
+   */
+  errorInline?: boolean;
+  /**
+   * - Skip processing if LilyPond is not available
+   */
+  skipOnMissing?: boolean;
+  /**
+   * - Remove tagline and crop whitespace from SVG output
+   */
+  compact?: boolean;
 };
 /**
  * @typedef {Object} LilyPondOptions
@@ -25,8 +25,10 @@ export type LilyPondOptions = {
  * @property {boolean} [compact=true] - Remove tagline and crop whitespace from SVG output
  */
 /**
- * Remark plugin to transform LilyPond code blocks into inline SVG images
+ * Remark plugin to transform LilyPond code blocks into inline SVG images.
  * @param {LilyPondOptions} [options={}] - Plugin configuration options
- * @returns {Function} The transformer function
+ * @returns {(tree: import('unist').Node) => Promise<void>} Unified transformer
  */
-declare function remarkLilypond(options?: LilyPondOptions): Function;
+declare function remarkLilypond(
+  options?: LilyPondOptions,
+): (tree: import("unist").Node) => Promise<void>;
