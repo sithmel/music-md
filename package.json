@@ -1,6 +1,6 @@
 {
   "name": "music-md",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A markdown renderer that converts markdown files to HTML or PDF with music notation support",
   "main": "index.js",
   "types": "types/index.d.ts",
@@ -18,8 +18,16 @@
     "pdf",
     "html"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Maurizio Lupo <maurizio.lupo@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sithmel/music-md.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sithmel/music-md/issues"
+  },
+  "homepage": "https://github.com/sithmel/music-md#readme",
   "dependencies": {
     "lilynode": "^0.5.2",
     "puppeteer": "^24.22.0",
